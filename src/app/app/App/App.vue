@@ -12,7 +12,8 @@
             <small>{{ $t('App.nav.choose' /* Components */) }}</small>
           </router-link>
          </li>
-         <li>
+         <li v-on:hasTeapot = "onHasTea"
+         v-if="hasTea">
           <!--<a href="/teapot" @click.native="navBarClose">
             <vue-icon-puzzle-piece />
             <small>{{ $t('App.nav.teapot' /* Components */) }}</small>
@@ -74,6 +75,7 @@
   import VueIconTeapot              from '../../shared/components/icons/VueIconTeapot/VueIconTeapot';
   import VueIconMicrowave           from '../../shared/components/icons/VueIconMicrowave/VueIconMicrowave';
   import VueIconChoose              from '../../shared/components/icons/VueIconChoose/VueIconChoose';
+  import Choose                     from '../../Choose/Choose';
 
   export default {
     components: {
@@ -91,10 +93,12 @@
       VueGridItem,
       VueFooter,
       VueNotificationStack,
+      Choose,
     },
     data() {
       return {
         isNavigating: false,
+        hasTea:false,
       };
     },
     computed:   {
@@ -108,6 +112,9 @@
 
         this.changeLocale(locale);
         this.navBarClose();
+      },
+      onHasTea: function(hasTeap){
+        this.hasTea = hasTeap;
       },
       navBarClose() {
         EventBus.$emit('navbar.close');

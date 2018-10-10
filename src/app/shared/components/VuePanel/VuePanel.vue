@@ -15,8 +15,10 @@
 
   .vuePanel {
     background-color: $panel-bg;
+    z-index:          1;
     box-shadow:       $panel-shadow;
     border-radius:    $panel-border-radius;
     margin:           $panel-margin;
   }
+  
 </style>

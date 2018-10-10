@@ -1,6 +1,7 @@
 {
   "App.core.welcome": "Welcome!",
   "App.core.description": "To the Kitchen Control",
+  "App.choose.choosetxt": "Choose your kitchen utensils:",
   "App.nav.components": "Components",
   "App.nav.counter": "Counter",
   "App.nav.docs": "Documentation",

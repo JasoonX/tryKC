@@ -91,6 +91,9 @@
 <style lang="scss" module>
   @import "../../styles";
 
+   input{
+     display:none;
+   }
   .checkbox {
     user-select: none;
     color:       $checkbox-color;
@@ -186,6 +189,7 @@
         left:     0;
         top:      0;
         cursor:   pointer;
+        display:none;
       }
 
       &:before {
