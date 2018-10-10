@@ -23,7 +23,7 @@ export const router: VueRouter = new VueRouter(
       ...ComponentsRoutes,
       ...TeapotRoutes,
       ...MicrowaveRoutes,
-      ...ChooseRoutes
+      ...ChooseRoutes,
     ],
     scrollBehavior(to: Route, from: Route, savedPosition: { x: number, y: number }) {
       if (to.hash) {
