@@ -45,7 +45,7 @@
     "release:patch": "changelog -p && git add CHANGELOG.md && git commit -m 'chore: update changelog' && npm version patch && git push origin && git push origin --tags",
     "compile-tools": "./node_modules/.bin/tsc -p ./tools/",
     "clean": "rimraf ./dist ./coverage ./tools/scripts/*.js ./tools/generators/*.js ./tools/generators/**/*.js ./storybook-static",
-    "prestart": "npm build",
+    "prestart": "npm run build",
     "start": "node dist/server/server.js",
     "dev:dev-server": "cross-env NODE_ENV=development webpack --mode development --config ./config/webpack.dev-server.config.js",
     "dev:server": "cross-env NODE_ENV=development webpack --mode development --config ./config/webpack.server.config.js",
