@@ -7,17 +7,28 @@
     <vue-nav-bar>
       <ul :class="$style.nav">
         <li>
-          <a href="/docs" @click.native="navBarClose">
-            <vue-icon-book />
-            <small>{{ $t('App.nav.docs' /* Documentation */) }}</small>
-          </a>
-        </li>
-        <li>
-          <router-link to="/counter" @click.native="navBarClose">
-            <vue-icon-hashtag />
-            <small>{{ $t('App.nav.counter' /* Counter */) }}</small>
+          <router-link to="/choose" @click.native="navBarClose">
+            <vue-icon-choose />
+            <small>{{ $t('App.nav.choose' /* Components */) }}</small>
           </router-link>
-        </li>
+         </li>
+         <li>
+          <!--<a href="/teapot" @click.native="navBarClose">
+            <vue-icon-puzzle-piece />
+            <small>{{ $t('App.nav.teapot' /* Components */) }}</small>
+          </router> -->
+          <router-link to="/teapot" @click.native="navBarClose">
+            <vue-icon-teapot />
+            <small>{{ $t('App.nav.teapot' /* Components */) }}</small>
+          </router-link>
+         </li>
+         <li>
+          <router-link to="/microwave" @click.native="navBarClose">
+            <vue-icon-microwave />
+            <small>{{ $t('App.nav.microwave' /* Components */) }}</small>
+          </router-link>
+         </li>
+         
         <li>
           <router-link to="/components" @click.native="navBarClose">
             <vue-icon-puzzle-piece />
@@ -31,21 +42,9 @@
           </a>
         </li>
         <li>
-          <a @click="localeSwitch('de')">
+          <a @click="localeSwitch('ru')">
             <vue-icon-flag />
-            <small>Deutsch</small>
-          </a>
-        </li>
-        <li>
-          <a @click="localeSwitch('pt')">
-            <vue-icon-flag />
-            <small>Português</small>
-          </a>
-        </li>
-        <li>
-          <a @click="localeSwitch('zh-cn')">
-            <vue-icon-flag />
-            <small>中文</small>
+            <small>Русский</small>
           </a>
         </li>
       </ul>
@@ -53,15 +52,7 @@
 
     <router-view :class="$style.content" />
 
-    <vue-footer />
-
-    <vue-cookie-consent
-      current-version="1.0.0"
-      :cookie-consent-version="cookieConsentVersion"
-      :set-cookie-consent-version="setCookieConsentVersion">
-      This is a cookie consent component which shows the cookie consent every time you change the version of the
-      consent.
-    </vue-cookie-consent>
+  
   </div>
 </template>
 
@@ -80,6 +71,9 @@
   import VueIconPuzzlePiece         from '../../shared/components/icons/VueIconPuzzlePiece/VueIconPuzzlePiece';
   import VueIconFlag                from '../../shared/components/icons/VueIconFlag/VueIconFlag';
   import VueNavigationProgress      from '../../shared/components/VueNavigationProgress/VueNavigationProgress';
+  import VueIconTeapot              from '../../shared/components/icons/VueIconTeapot/VueIconTeapot';
+  import VueIconMicrowave           from '../../shared/components/icons/VueIconMicrowave/VueIconMicrowave';
+  import VueIconChoose              from '../../shared/components/icons/VueIconChoose/VueIconChoose';
 
   export default {
     components: {
@@ -88,6 +82,9 @@
       VueIconPuzzlePiece,
       VueIconHashtag,
       VueIconBook,
+      VueIconTeapot,
+      VueIconMicrowave,
+      VueIconChoose,
       VueCookieConsent,
       VueNavBar,
       VueGrid,

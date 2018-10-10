@@ -1,0 +1,11 @@
+{
+    "App.core.welcome": "Добро пожаловать!",
+    "App.core.description": "В Kitchen Control",
+    "App.nav.components": "Компоненты",
+    "App.nav.counter": "Counter",
+    "App.nav.docs": "Документация",
+    "App.nav.home": "Домой",
+    "App.nav.teapot": "Чайник",
+    "App.nav.microwave": "Микроволновка",
+    "App.nav.choose": "Выбор"
+}

@@ -13,11 +13,6 @@ export const AppRoutes: RouteConfig[] = [
 
   // example redirect
   // TODO: remove from production code
-  {
-    path:      '/redirect',
-    redirect:  '/',
-  },
-
   // example route for authentication guard
   // will redirect to `/login` (implemented in `src/app/router`)
   // TODO: remove from production code

@@ -2,10 +2,7 @@
   <div :class="$style.home">
     <stage
       :disable-particles="disableParticles" />
-    <dev-ex />
-    <enterprise-ready />
-    <user-experience />
-    <quick-start />
+      
   </div>
 </template>
 

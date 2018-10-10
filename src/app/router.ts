@@ -5,6 +5,9 @@ import { AppRoutes }                     from './app/routes';
 import { HomeRoutes }                    from './home/routes';
 import { CounterRoutes }                 from './counter/routes';
 import { ComponentsRoutes }              from './components/routes';
+import { TeapotRoutes }                  from './Teapot/routes';
+import { MicrowaveRoutes }               from './Microwave/routes';
+import { ChooseRoutes }                  from './Choose/routes';
 
 Vue.use(VueRouter);
 Vue.use(Meta);
@@ -18,6 +21,9 @@ export const router: VueRouter = new VueRouter(
       ...HomeRoutes,
       ...CounterRoutes,
       ...ComponentsRoutes,
+      ...TeapotRoutes,
+      ...MicrowaveRoutes,
+      ...ChooseRoutes
     ],
     scrollBehavior(to: Route, from: Route, savedPosition: { x: number, y: number }) {
       if (to.hash) {

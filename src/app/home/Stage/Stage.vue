@@ -1,24 +1,19 @@
 <template>
   <div :class="$style.stage" ref="stage">
     <canvas :class="$style.canvas" ref="canvas"></canvas>
-    <div :class="$style.accent"></div>
-    <div :class="$style.accentTwo"></div>
-
     <vue-grid>
       <vue-grid-row>
         <vue-grid-item class="vueGridItem">
-          <h1 :class="$style.title">vue-starter</h1>
+          <h1 :class="$style.title"> {{
+            $t('App.core.welcome' )
+            }}</h1>
           <div :class="$style.subTitle">
+          <h3>
             {{
-            $t('App.core.description' /* A flexible, scalable, opinionated boilerplate for production-ready PWAs with
-            focus on performance, development speed, and best practices */)
+            $t('App.core.description' )
             }}
+            </h3>
           </div>
-
-          <a :class="$style.github" href="https://github.com/devCrossNet/vue-starter" target="_blank" rel="noopener"
-             aria-label="github repository">
-            <vue-icon-github />
-          </a>
         </vue-grid-item>
       </vue-grid-row>
     </vue-grid>
@@ -78,11 +73,11 @@
 
   .stage {
     min-height: 100vh;
-    background: linear-gradient(171deg, $brand-dark-primary 0%, $brand-primary 100%);
+    background: url(../../../static/trianglify-background.png);
+    background-size:cover;
     overflow:   hidden;
     position:   relative;
     text-align: center;
-    @include background-gradient($brand-dark-primary, $brand-primary, 171deg);
   }
 
   .accent {
