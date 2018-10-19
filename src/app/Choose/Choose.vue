@@ -13,7 +13,8 @@
                   name="check"
                   id="check"
                   label= 'Teapot'
-                  v-model="HasTeapot" />
+                  v-model="HasTeapot"
+                  @click="$emit('hasTeapot',hasTeapot)"/>
                 </vue-grid-item>
                 <vue-grid-item>
                 </vue-grid-item>

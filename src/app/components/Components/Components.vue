@@ -131,6 +131,9 @@
             tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
             tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
 
+
+
+
             Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu
             feugiat nulla facilisis.
 
@@ -149,7 +152,7 @@
       <vue-grid-row>
         <vue-grid-item class="vueGridItem">
           <h2>Checkboxes / RadioButtons</h2>
-
+      
           <vue-checkbox
             name="check"
             id="check"

@@ -6,18 +6,13 @@
 
     <vue-nav-bar>
       <ul :class="$style.nav">
-        <li>
+        <!--<li>
           <router-link to="/choose" @click.native="navBarClose">
             <vue-icon-choose />
             <small>{{ $t('App.nav.choose' /* Components */) }}</small>
           </router-link>
-         </li>
-         <li v-on:hasTeapot = "onHasTea"
-         v-if="hasTea">
-          <!--<a href="/teapot" @click.native="navBarClose">
-            <vue-icon-puzzle-piece />
-            <small>{{ $t('App.nav.teapot' /* Components */) }}</small>
-          </router> -->
+         </li-->
+         <li >
           <router-link to="/teapot" @click.native="navBarClose">
             <vue-icon-teapot />
             <small>{{ $t('App.nav.teapot' /* Components */) }}</small>
@@ -29,8 +24,31 @@
             <small>{{ $t('App.nav.microwave' /* Components */) }}</small>
           </router-link>
          </li>
-         
-        <li>
+          <li>
+          <router-link to="/fridge" @click.native="navBarClose">
+            <vue-icon-fridge />
+            <small>{{ $t('App.nav.fridge' /* Components */) }}</small>
+          </router-link>
+         </li>
+         <li>
+          <router-link to="/oven" @click.native="navBarClose">
+            <vue-icon-oven />
+            <small>{{ $t('App.nav.oven' /* Components */) }}</small>
+          </router-link>
+         </li>
+          <li>
+          <router-link to="/crane" @click.native="navBarClose">
+            <vue-icon-crane />
+            <small>{{ $t('App.nav.crane' /* Components */) }}</small>
+          </router-link>
+         </li>
+          <!--li>
+          <router-link to="/coffee" @click.native="navBarClose">
+            <vue-icon-coffee />
+            <small>{{ $t('App.nav.coffee' /* Components */) }}</small>
+          </router-link>
+         </li>
+        <!--li>
           <router-link to="/components" @click.native="navBarClose">
             <vue-icon-puzzle-piece />
             <small>{{ $t('App.nav.components' /* Components */) }}</small>
@@ -47,7 +65,7 @@
             <vue-icon-flag />
             <small>Русский</small>
           </a>
-        </li>
+        </li-->
       </ul>
     </vue-nav-bar>
 
@@ -75,7 +93,10 @@
   import VueIconTeapot              from '../../shared/components/icons/VueIconTeapot/VueIconTeapot';
   import VueIconMicrowave           from '../../shared/components/icons/VueIconMicrowave/VueIconMicrowave';
   import VueIconChoose              from '../../shared/components/icons/VueIconChoose/VueIconChoose';
-  import Choose                     from '../../Choose/Choose';
+  import VueIconCoffee              from '../../shared/components/icons/VueIconCoffee/VueIconCoffee';
+  import VueIconFridge              from '../../shared/components/icons/VueIconFridge/VueIconFridge';
+  import VueIconOven                from '../../shared/components/icons/VueIconOven/VueIconOven';
+  import VueIconCrane                from '../../shared/components/icons/VueIconCrane/VueIconCrane';
 
   export default {
     components: {
@@ -87,13 +108,16 @@
       VueIconTeapot,
       VueIconMicrowave,
       VueIconChoose,
+      VueIconCoffee,
+      VueIconOven,
       VueCookieConsent,
       VueNavBar,
       VueGrid,
       VueGridItem,
       VueFooter,
       VueNotificationStack,
-      Choose,
+      VueIconFridge,
+      VueIconCrane,
     },
     data() {
       return {
@@ -112,9 +136,6 @@
 
         this.changeLocale(locale);
         this.navBarClose();
-      },
-      onHasTea: function(hasTeap){
-        this.hasTea = hasTeap;
       },
       navBarClose() {
         EventBus.$emit('navbar.close');

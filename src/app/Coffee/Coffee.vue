@@ -4,7 +4,7 @@
       <vue-grid>
         <vue-grid-row>
           <vue-grid-item class="vueGridItem">
-            <h1>{{ $t('App.nav.teapot' /* Components */) }}</h1>
+            <h1>{{ $t('App.nav.coffee' /* Components */) }}</h1>
           </vue-grid-item>
         </vue-grid-row>
       </vue-grid>
@@ -48,16 +48,24 @@
         <vue-grid-item class="vueGridItem">
           <h2>Time left</h2>
         </vue-grid-item>
-        <vue-grid-item>
-          <br />
-          <h4>
-            <vue-input
-                name="input2"
-                id="input2"
-                disabled
-                v-model="inputValue"
-                 />    
-          </h4>
+        <vue-grid-item class="vueGridItem">
+          <h2>Select</h2>
+
+          <vue-select
+            name="select1"
+            id="select1"
+            :options="options"
+            :value="selectedOption"
+            @input="selectChange" />
+
+          <p>Multi</p>
+          <vue-select
+            name="select2"
+            id="select2"
+            :options="options"
+            :multiple="true"
+            :value="selectedOption"
+            @input="selectChange" />
         </vue-grid-item>
       </vue-grid-row>
        <vue-grid-row>
@@ -71,7 +79,7 @@
             name="toggle"
             id="toggle"
             v-model="toggle"
-            v-bind:label = labTog
+            label="Off"
             @click = "addNotificationSwitch"
           />
         </vue-grid-item>
@@ -194,11 +202,26 @@
         checked:             true,
         radio:               'radio1',
         page:                1,
-        labTog:              'Off',
         options:             [
           {
             label: 'Foo',
             value: 'foo',
+          },
+          {
+            label: 'Bar',
+            value: 'bar',
+          },
+          {
+            label: 'Baz',
+            value: 'baz',
+          },
+          {
+            label: 'Bla Bla Bla Bla Bla',
+            value: 'bla',
+          },
+          {
+            label: 'Lorem Ipsum la la la',
+            value: 'lorem',
           },
         ],
         selectedOption:      '',
@@ -233,7 +256,7 @@
         console.log(date);
       },
       addNotificationSwitch() {
-     this.isDisabled = !this.isDisabled;
+        this.isDisabled = !this.isDisabled;
         /*let minCh = +this.inputValue.split(' ')[0]*60 + +this.inputValue.split(' ')[2]
         while(minCh !== 0)
           setTimeout(function v(){
@@ -244,7 +267,6 @@
         */
 
         if(!this.toggle){
-          this.labTog = "On";
           addNotification(
             {
               title: 'Teapot is on',
@@ -253,7 +275,6 @@
           );
         }
         else if(this.toggle){
-          this.labTog = "Off";
           addNotification(
             {
               title: 'Teapot is off',

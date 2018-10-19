@@ -4,7 +4,8 @@
       <vue-grid>
         <vue-grid-row>
           <vue-grid-item class="vueGridItem">
-            <h1>{{ $t('App.nav.teapot' /* Components */) }}</h1>
+            <br/>
+            <h1>{{ $t('App.nav.crane' /* Components */) }}</h1>
           </vue-grid-item>
         </vue-grid-row>
       </vue-grid>
@@ -31,12 +32,12 @@
 
       <vue-grid-row>
         <vue-grid-item class="vueGridItem">
-          <h2>Temperature</h2>
+          <h4>Temperature</h4>
         </vue-grid-item>
         <vue-grid-item>
             <vue-slider
               :min="0"
-              :max="100"
+              :max="40"
               :values="[0]"
               @change="sliderChange"
               :formatValue="formatSliderValue"
@@ -44,34 +45,18 @@
             />
         </vue-grid-item>
       </vue-grid-row>
-      <vue-grid-row>
-        <vue-grid-item class="vueGridItem">
-          <h2>Time left</h2>
-        </vue-grid-item>
-        <vue-grid-item>
-          <br />
-          <h4>
-            <vue-input
-                name="input2"
-                id="input2"
-                disabled
-                v-model="inputValue"
-                 />    
-          </h4>
-        </vue-grid-item>
-      </vue-grid-row>
        <vue-grid-row>
           <vue-grid-item class="vueGridItem">
-          <h2>On/Off</h2>
+          <h4>On/Off</h4>
           </vue-grid-item>
         <vue-grid-item class="vueGridItem">
           <br />
-          <br />
+
           <vue-toggle
             name="toggle"
             id="toggle"
             v-model="toggle"
-            v-bind:label = labTog
+            label="Off"
             @click = "addNotificationSwitch"
           />
         </vue-grid-item>
@@ -194,7 +179,6 @@
         checked:             true,
         radio:               'radio1',
         page:                1,
-        labTog:              'Off',
         options:             [
           {
             label: 'Foo',
@@ -223,40 +207,26 @@
         console.log(sliderOptions);
       },
       formatSliderValue(value: number) {
-          let tv = value * 5;
-          let m = Math.floor(tv/60);
-          let s = tv % 60 ;
-          this.inputValue = m +" minutes " + s + " seconds"; 
         return `${Math.floor(value)} °C`;
       },
       calendarChange(date: Date | Date[]) {
         console.log(date);
       },
       addNotificationSwitch() {
-     this.isDisabled = !this.isDisabled;
-        /*let minCh = +this.inputValue.split(' ')[0]*60 + +this.inputValue.split(' ')[2]
-        while(minCh !== 0)
-          setTimeout(function v(){
-          minCh--;
-          this.inputValue = Math.floor(minCh/60) + " minutes " +  minCh % 60 + " seconds";
-          }
-          ,3000);
-        */
+        this.isDisabled = !this.isDisabled;
 
         if(!this.toggle){
-          this.labTog = "On";
           addNotification(
             {
-              title: 'Teapot is on',
+              title: 'Crane is on',
               text:  'Be carefull,soon it will be off',
             } as INotification,
           );
         }
         else if(this.toggle){
-          this.labTog = "Off";
           addNotification(
             {
-              title: 'Teapot is off',
+              title: 'Crane is off',
               text:  'You cam make your drink.',
             } as INotification,
           );
@@ -265,32 +235,6 @@
       selectChange(option: string) {
         console.log(option);
         this.selectedOption = option;
-      },
-      onRequest(query: string, shouldReturn: boolean = true) {
-        this.autocompleteLoading = true;
-
-        /* istanbul ignore next */
-        setTimeout(() => {
-          let returnOptions: boolean = Math.random() > 0.5 || query.indexOf('foo') > -1;
-
-          if (!shouldReturn) {
-            returnOptions = shouldReturn;
-          }
-
-          if (returnOptions) {
-            this.autocompleteOptions = AutocompleteOptionsFixture;
-          } else {
-            this.autocompleteOptions = [];
-          }
-
-          this.autocompleteLoading = false;
-        }, 1000);
-      },
-      onAutocompleteChange(option: IAutocompleteOption) {
-        console.log(option);
-      },
-      dataTableClick(row: any) {
-        console.log(row);
       },
     },
   };
@@ -314,7 +258,7 @@
   }
 
   .header {
-    padding:     $nav-bar-height 0 $nav-bar-height * 0.5;
+    padding:     0 0 $nav-bar-height * 0.5;
     text-align:  center;
     text-shadow: 0 5px 10px rgba(0, 0, 0, 0.33);
     background: $nav-bar-accent-bg;

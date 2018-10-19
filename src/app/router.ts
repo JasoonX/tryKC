@@ -8,6 +8,10 @@ import { ComponentsRoutes }              from './components/routes';
 import { TeapotRoutes }                  from './Teapot/routes';
 import { MicrowaveRoutes }               from './Microwave/routes';
 import { ChooseRoutes }                  from './Choose/routes';
+import { CoffeeRoutes }                  from './Coffee/routes';
+import { FridgeRoutes }                  from './Fridge/routes';
+import { OvenRoutes }                    from './Oven/routes';
+import { CraneRoutes }                   from './Crane/routes';
 
 Vue.use(VueRouter);
 Vue.use(Meta);
@@ -24,6 +28,10 @@ export const router: VueRouter = new VueRouter(
       ...TeapotRoutes,
       ...MicrowaveRoutes,
       ...ChooseRoutes,
+      ...CoffeeRoutes,
+      ...FridgeRoutes,
+      ...OvenRoutes,
+      ...CraneRoutes,
     ],
     scrollBehavior(to: Route, from: Route, savedPosition: { x: number, y: number }) {
       if (to.hash) {

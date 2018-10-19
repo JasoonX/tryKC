@@ -4,7 +4,7 @@
       <vue-grid>
         <vue-grid-row>
           <vue-grid-item class="vueGridItem">
-            <h1>{{ $t('App.nav.teapot' /* Components */) }}</h1>
+            <h1>{{ $t('App.nav.fridge' /* Components */) }}</h1>
           </vue-grid-item>
         </vue-grid-row>
       </vue-grid>
@@ -31,38 +31,21 @@
 
       <vue-grid-row>
         <vue-grid-item class="vueGridItem">
-          <h2>Temperature</h2>
+          <h2>Fridge Temperature</h2>
         </vue-grid-item>
         <vue-grid-item>
             <vue-slider
-              :min="0"
-              :max="100"
-              :values="[0]"
+              :min="-20"
+              :max="0"
+              :values="[-10]"
               @change="sliderChange"
               :formatValue="formatSliderValue"
-              :disabled="isDisabled"
             />
-        </vue-grid-item>
-      </vue-grid-row>
-      <vue-grid-row>
-        <vue-grid-item class="vueGridItem">
-          <h2>Time left</h2>
-        </vue-grid-item>
-        <vue-grid-item>
-          <br />
-          <h4>
-            <vue-input
-                name="input2"
-                id="input2"
-                disabled
-                v-model="inputValue"
-                 />    
-          </h4>
         </vue-grid-item>
       </vue-grid-row>
        <vue-grid-row>
           <vue-grid-item class="vueGridItem">
-          <h2>On/Off</h2>
+          <h2>Fridge Open/Close</h2>
           </vue-grid-item>
         <vue-grid-item class="vueGridItem">
           <br />
@@ -70,9 +53,40 @@
           <vue-toggle
             name="toggle"
             id="toggle"
-            v-model="toggle"
-            v-bind:label = labTog
-            @click = "addNotificationSwitch"
+            v-model="fridgetoggle"
+            v-bind:label= fridgeTog
+            @click = "addNotificationSwitchFridge"
+          />
+        </vue-grid-item>
+      </vue-grid-row>
+      
+      <vue-grid-row>
+        <vue-grid-item class="vueGridItem">
+          <h2>Freezer Temperature</h2>
+        </vue-grid-item>
+        <vue-grid-item>
+            <vue-slider
+              :min="-20"
+              :max="0"
+              :values="[-15]"
+              @change="sliderChange"
+              :formatValue="formatSliderValue"
+            />
+        </vue-grid-item>
+      </vue-grid-row>
+       <vue-grid-row>
+          <vue-grid-item class="vueGridItem">
+          <h2>Freezer Open/Close</h2>
+          </vue-grid-item>
+        <vue-grid-item class="vueGridItem">
+          <br />
+          <br />
+          <vue-toggle
+            name="toggle2"
+            id="toggle2"
+            v-model="freezertoggle"
+            v-bind:label="freezerTog"
+            @click = "addNotificationSwitchFreezer"
           />
         </vue-grid-item>
       </vue-grid-row>
@@ -194,7 +208,6 @@
         checked:             true,
         radio:               'radio1',
         page:                1,
-        labTog:              'Off',
         options:             [
           {
             label: 'Foo',
@@ -214,8 +227,12 @@
         ],
         dataTableHeader:     dataTableHeaderFixture,
         dataTableData:       dataTableDataFixture,
-        toggle:              false,
+        fridgetoggle:        false,
+        freezertoggle:       false,
         isDisabled:          false,
+        isDisabled2:         false,
+        fridgeTog:           "Closed",
+        freezerTog:          "Closed",
       };
     },
     methods:{
@@ -223,41 +240,49 @@
         console.log(sliderOptions);
       },
       formatSliderValue(value: number) {
-          let tv = value * 5;
-          let m = Math.floor(tv/60);
-          let s = tv % 60 ;
-          this.inputValue = m +" minutes " + s + " seconds"; 
         return `${Math.floor(value)} °C`;
       },
       calendarChange(date: Date | Date[]) {
         console.log(date);
       },
-      addNotificationSwitch() {
-     this.isDisabled = !this.isDisabled;
-        /*let minCh = +this.inputValue.split(' ')[0]*60 + +this.inputValue.split(' ')[2]
-        while(minCh !== 0)
-          setTimeout(function v(){
-          minCh--;
-          this.inputValue = Math.floor(minCh/60) + " minutes " +  minCh % 60 + " seconds";
-          }
-          ,3000);
-        */
-
-        if(!this.toggle){
-          this.labTog = "On";
+      addNotificationSwitchFridge() {
+        this.isDisabled = !this.isDisabled;
+        if(!this.fridgetoggle){
+          this.fridgeTog = "Open";
           addNotification(
             {
-              title: 'Teapot is on',
+              title: 'Fridge is open',
               text:  'Be carefull,soon it will be off',
             } as INotification,
           );
         }
-        else if(this.toggle){
-          this.labTog = "Off";
+        else if(this.fridgetoggle){
+          this.fridgeTog = "Closed";
           addNotification(
             {
-              title: 'Teapot is off',
-              text:  'You cam make your drink.',
+              title: 'Fridge is closed',
+              text:  'You can make your drink.',
+            } as INotification,
+          );
+        }
+      },
+      addNotificationSwitchFreezer() {
+        this.isDisabled2 = !this.isDisabled2;
+        if(!this.freezertoggle){
+              this.freezerTog = "Open";
+          addNotification(
+            {
+              title: 'Freezer is open',
+              text:  'Be carefull,soon it will be off',
+            } as INotification,
+          );
+        }
+        else if(this.freezertoggle){
+          this.freezerTog = "Closed";
+          addNotification(
+            {
+              title: 'Freezer is closed',
+              text:  'You can make your drink.',
             } as INotification,
           );
         }

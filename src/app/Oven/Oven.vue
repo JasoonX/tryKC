@@ -4,7 +4,7 @@
       <vue-grid>
         <vue-grid-row>
           <vue-grid-item class="vueGridItem">
-            <h1>{{ $t('App.nav.teapot' /* Components */) }}</h1>
+            <h1>{{ $t('App.nav.oven' /* Components */) }}</h1>
           </vue-grid-item>
         </vue-grid-row>
       </vue-grid>
@@ -31,12 +31,12 @@
 
       <vue-grid-row>
         <vue-grid-item class="vueGridItem">
-          <h2>Temperature</h2>
+          <h4>Up Right Burner Temperature</h4>
         </vue-grid-item>
         <vue-grid-item>
             <vue-slider
               :min="0"
-              :max="100"
+              :max="40"
               :values="[0]"
               @change="sliderChange"
               :formatValue="formatSliderValue"
@@ -44,25 +44,41 @@
             />
         </vue-grid-item>
       </vue-grid-row>
-      <vue-grid-row>
+       <vue-grid-row>
+          <vue-grid-item class="vueGridItem">
+          <h4>Up Right Burner On/Off</h4>
+          </vue-grid-item>
         <vue-grid-item class="vueGridItem">
-          <h2>Time left</h2>
+          <br />
+          <vue-toggle
+            name="toggle"
+            id="toggle"
+            v-model="toggleUpRight"
+            label="Off"
+            @click = "addNotificationSwitchUpRight"
+          />
+        </vue-grid-item>
+      </vue-grid-row>
+     <vue-grid-row>
+        <vue-grid-item class="vueGridItem">
+          <br/>
+          <h4>Down Right Burner Temperature</h4>
         </vue-grid-item>
         <vue-grid-item>
-          <br />
-          <h4>
-            <vue-input
-                name="input2"
-                id="input2"
-                disabled
-                v-model="inputValue"
-                 />    
-          </h4>
+            <vue-slider
+              :min="0"
+              :max="40"
+              :values="[0]"
+              @change="sliderChange"
+              :formatValue="formatSliderValue"
+              :disabled="isDisabled"
+            />
         </vue-grid-item>
       </vue-grid-row>
        <vue-grid-row>
           <vue-grid-item class="vueGridItem">
-          <h2>On/Off</h2>
+            <br/>
+          <h4>Down Right Burner On/Off</h4>
           </vue-grid-item>
         <vue-grid-item class="vueGridItem">
           <br />
@@ -70,13 +86,76 @@
           <vue-toggle
             name="toggle"
             id="toggle"
-            v-model="toggle"
-            v-bind:label = labTog
-            @click = "addNotificationSwitch"
+            v-model="toggleDownRight"
+            label="Off"
+            @click = "addNotificationSwitchDownRight"
           />
         </vue-grid-item>
       </vue-grid-row>
-     
+      <vue-grid-row>
+        <vue-grid-item class="vueGridItem">
+          <h4>Up Left Burner Temperature</h4>
+        </vue-grid-item>
+        <vue-grid-item>
+            <vue-slider
+              :min="0"
+              :max="40"
+              :values="[0]"
+              @change="sliderChange"
+              :formatValue="formatSliderValue"
+              :disabled="isDisabled"
+            />
+        </vue-grid-item>
+      </vue-grid-row>
+       <vue-grid-row>
+          <vue-grid-item class="vueGridItem">
+          <h4>Up Left Burner On/Off</h4>
+          </vue-grid-item>
+        <vue-grid-item class="vueGridItem">
+          <br />
+          <br />
+          <vue-toggle
+            name="toggle"
+            id="toggle"
+            v-model="toggleUpLeft"
+            label="Off"
+            @click = "addNotificationSwitchUpLeft"
+          />
+        </vue-grid-item>
+      </vue-grid-row>
+      <vue-grid-row>
+        <vue-grid-item class="vueGridItem">
+          <br/>
+          <h4>Down Left Burner Temperature</h4>
+        </vue-grid-item>
+        <vue-grid-item>
+            <vue-slider
+              :min="0"
+              :max="40"
+              :values="[0]"
+              @change="sliderChange"
+              :formatValue="formatSliderValue"
+              :disabled="isDisabled"
+            />
+        </vue-grid-item>
+      </vue-grid-row>
+       <vue-grid-row>
+          <vue-grid-item class="vueGridItem">
+            <br/>
+          <h4>Down Left Burner On/Off</h4>
+          </vue-grid-item>
+        <vue-grid-item class="vueGridItem">
+          <br />
+          <br />
+          <vue-toggle
+            name="toggle"
+            id="toggle"
+            v-model="toggleDownLeft"
+            label="Off"
+            @click = "addNotificationSwitchDownLeft"
+          />
+        </vue-grid-item>
+      </vue-grid-row>
     </vue-grid>
   </div>
 </template>
@@ -194,7 +273,6 @@
         checked:             true,
         radio:               'radio1',
         page:                1,
-        labTog:              'Off',
         options:             [
           {
             label: 'Foo',
@@ -214,7 +292,10 @@
         ],
         dataTableHeader:     dataTableHeaderFixture,
         dataTableData:       dataTableDataFixture,
-        toggle:              false,
+        toggleUpRight:       false,
+        toggleUpLeft:        false,
+        toggleDownRight:     false,
+        toggleDownLeft:      false,
         isDisabled:          false,
       };
     },
@@ -223,40 +304,78 @@
         console.log(sliderOptions);
       },
       formatSliderValue(value: number) {
-          let tv = value * 5;
-          let m = Math.floor(tv/60);
-          let s = tv % 60 ;
-          this.inputValue = m +" minutes " + s + " seconds"; 
         return `${Math.floor(value)} °C`;
       },
       calendarChange(date: Date | Date[]) {
         console.log(date);
       },
-      addNotificationSwitch() {
-     this.isDisabled = !this.isDisabled;
-        /*let minCh = +this.inputValue.split(' ')[0]*60 + +this.inputValue.split(' ')[2]
-        while(minCh !== 0)
-          setTimeout(function v(){
-          minCh--;
-          this.inputValue = Math.floor(minCh/60) + " minutes " +  minCh % 60 + " seconds";
-          }
-          ,3000);
-        */
-
-        if(!this.toggle){
-          this.labTog = "On";
+      addNotificationSwitchUpRight() {
+        if(!this.toggleUpRight){
           addNotification(
             {
-              title: 'Teapot is on',
+              title: 'Up Right Burner is on',
               text:  'Be carefull,soon it will be off',
             } as INotification,
           );
         }
-        else if(this.toggle){
-          this.labTog = "Off";
+        else if(this.toggleUpRight){
           addNotification(
             {
-              title: 'Teapot is off',
+              title: 'Up Right Burner is off',
+              text:  'You cam make your drink.',
+            } as INotification,
+          );
+        }
+      },
+      addNotificationSwitchUpLeft() {
+        if(!this.toggleUpLeft){
+          addNotification(
+            {
+              title: 'Up Left Burner is on',
+              text:  'Be carefull,soon it will be off',
+            } as INotification,
+          );
+        }
+        else if(this.toggleUpLeft){
+          addNotification(
+            {
+              title: 'Up Left Burner is off',
+              text:  'You cam make your drink.',
+            } as INotification,
+          );
+        }
+      },
+      addNotificationSwitchDownRight() {
+        if(!this.toggleDownRight){
+          addNotification(
+            {
+              title: 'Down Right Burner is on',
+              text:  'Be carefull,soon it will be off',
+            } as INotification,
+          );
+        }
+        else if(this.toggleDownRight){
+          addNotification(
+            {
+              title: 'Down Right Burner is off',
+              text:  'You cam make your drink.',
+            } as INotification,
+          );
+        }
+      },
+      addNotificationSwitchDownLeft() {
+        if(!this.toggleDownLeft){
+          addNotification(
+            {
+              title: 'Down Left Burner is on',
+              text:  'Be carefull,soon it will be off',
+            } as INotification,
+          );
+        }
+        else if(this.toggleDownLeft){
+          addNotification(
+            {
+              title: 'Down Left Burner is off',
               text:  'You cam make your drink.',
             } as INotification,
           );
@@ -265,32 +384,6 @@
       selectChange(option: string) {
         console.log(option);
         this.selectedOption = option;
-      },
-      onRequest(query: string, shouldReturn: boolean = true) {
-        this.autocompleteLoading = true;
-
-        /* istanbul ignore next */
-        setTimeout(() => {
-          let returnOptions: boolean = Math.random() > 0.5 || query.indexOf('foo') > -1;
-
-          if (!shouldReturn) {
-            returnOptions = shouldReturn;
-          }
-
-          if (returnOptions) {
-            this.autocompleteOptions = AutocompleteOptionsFixture;
-          } else {
-            this.autocompleteOptions = [];
-          }
-
-          this.autocompleteLoading = false;
-        }, 1000);
-      },
-      onAutocompleteChange(option: IAutocompleteOption) {
-        console.log(option);
-      },
-      dataTableClick(row: any) {
-        console.log(row);
       },
     },
   };

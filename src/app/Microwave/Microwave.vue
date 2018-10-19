@@ -4,40 +4,23 @@
       <vue-grid>
         <vue-grid-row>
           <vue-grid-item class="vueGridItem">
-            <h1>{{ $t('App.nav.microwave' /* Components */) }}</h1>
+            <br/>
+            <br/>
+            <h3>{{ $t('App.nav.microwave' /* Components */) }}</h3>
           </vue-grid-item>
         </vue-grid-row>
       </vue-grid>
     </div>
-
     <vue-grid>
-      <!--vue-grid-row>
-        <vue-grid-item class="vueGridItem">
-          <h2>Inputs</h2>
-          <vue-input
-            name="input1"
-            id="input1"
-            placeholder="Placeholder"
-            message="test"
-            v-model="inputValue" />
-          <br />
-          <vue-input
-            name="input2"
-            id="input2"
-            placeholder="Placeholder"
-            disabled
-            v-model="inputValue" />
-        </vue-grid-item -->
-
       <vue-grid-row>
         <vue-grid-item class="vueGridItem">
-          <h2>Temperature</h2>
+          <h4>Microwaves</h4>
         </vue-grid-item>
         <vue-grid-item>
             <vue-slider
-              :min="0"
-              :max="100"
-              :values="[0]"
+              :min="100"
+              :max="800"
+              :values="[360]"
               @change="sliderChange"
               :formatValue="formatSliderValue"
               :disabled="isDisabled"
@@ -46,18 +29,17 @@
       </vue-grid-row>
       <vue-grid-row>
         <vue-grid-item class="vueGridItem">
-          <h2>Time left</h2>
+          <h4>Time</h4>
         </vue-grid-item>
         <vue-grid-item>
-          <br />
-          <h4>
-            <vue-input
-                name="input2"
-                id="input2"
-                disabled
-                v-model="inputValue"
-                 />    
-          </h4>
+            <vue-slider
+              :min="0"
+              :max="60"
+              :values="[0]"
+              @change="sliderChange"
+              :formatValue="formatSliderValue2"
+              :disabled="isDisabled"
+            />
         </vue-grid-item>
       </vue-grid-row>
        <vue-grid-row>
@@ -71,7 +53,7 @@
             name="toggle"
             id="toggle"
             v-model="toggle"
-            label="Off"
+            v-bind:label=labTog
             @click = "addNotificationSwitch"
           />
         </vue-grid-item>
@@ -215,6 +197,7 @@
         dataTableData:       dataTableDataFixture,
         toggle:              false,
         isDisabled:          false,
+        labTog:              'Off',
       };
     },
     methods:{
@@ -222,38 +205,31 @@
         console.log(sliderOptions);
       },
       formatSliderValue(value: number) {
-          let tv = value * 5;
-          let m = Math.floor(tv/60);
-          let s = tv % 60 ;
-          this.inputValue = m +" minutes " + s + " seconds"; 
-        return `${Math.floor(value)} °C`;
+        return `${Math.floor(value)} mAh`;
+      },
+      formatSliderValue2(value: number) {
+        return `${Math.floor(value)} minutes`;
       },
       calendarChange(date: Date | Date[]) {
         console.log(date);
       },
       addNotificationSwitch() {
         this.isDisabled = !this.isDisabled;
-        /*let minCh = +this.inputValue.split(' ')[0]*60 + +this.inputValue.split(' ')[2]
-        while(minCh !== 0)
-          setTimeout(function v(){
-          minCh--;
-          this.inputValue = Math.floor(minCh/60) + " minutes " +  minCh % 60 + " seconds";
-          }
-          ,3000);
-        */
-
+       
         if(!this.toggle){
+             this.labTog = "On";
           addNotification(
             {
-              title: 'Teapot is on',
+              title: 'Microwave is on',
               text:  'Be carefull,soon it will be off',
             } as INotification,
           );
         }
         else if(this.toggle){
+          this.labTog = "Off";
           addNotification(
             {
-              title: 'Teapot is off',
+              title: 'Microwave is off',
               text:  'You cam make your drink.',
             } as INotification,
           );
@@ -311,7 +287,7 @@
   }
 
   .header {
-    padding:     $nav-bar-height 0 $nav-bar-height * 0.5;
+    padding:     0 0 $nav-bar-height * 0.25;
     text-align:  center;
     text-shadow: 0 5px 10px rgba(0, 0, 0, 0.33);
     background: $nav-bar-accent-bg;
